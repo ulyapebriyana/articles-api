@@ -6,6 +6,15 @@ export const successResponse = (res, status, message, data) => {
     })
 }
 
+export const paginate = (page, limit, count, rows) => {
+    return {
+        currentPage: page,
+        totalItems: count,
+        totalPages: Math.ceil(count / limit),
+        result: rows
+    }
+}
+
 export const errorClientResponse = (res, status, message) => {
     return res.status(status).json({
         status: status,

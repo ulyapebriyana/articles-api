@@ -1,5 +1,7 @@
 import User from "./user.js";
 import Article from "./article.js";
+import Like from "./like.js";
+import Profile from "./profile.js";
 
 User.hasMany(Article, {
     onDelete: "CASCADE",
@@ -7,6 +9,22 @@ User.hasMany(Article, {
 })
 Article.belongsTo(User)
 
-// await User.sync({alter: true})
+User.hasMany(Like, {
+    onDelete: 'CASCADE',
+    onUpdate: 'CASCADE'
+})
+Article.hasMany(Like, {
+    onDelete: 'CASCADE',
+    onUpdate: 'CASCADE'
+})
+Like.belongsTo(Article)
+Like.belongsTo(User)
 
-export { User, Article }
+User.hasOne(Profile, {
+    onDelete: 'CASCADE',
+    onUpdate: 'CASCADE'
+})
+Profile.belongsTo(User)
+// await Profile.sync({alter: true})
+
+export { User, Article, Like, Profile }
